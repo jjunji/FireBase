@@ -72,7 +72,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void postData(View view){
-        Intent intent = new Intent(this, DetailActivity.class);
+        Intent intent = new Intent(this, WriteActivity.class);
         startActivity(intent);
     }
 }

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.example.jhjun.firebasebbs.domain.Bbs;
@@ -46,9 +47,15 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot data) {
                 List<Bbs> list = new ArrayList<Bbs>();
-                for(DataSnapshot item : data.getChildren()){
-                    Bbs bbs = item.getValue(Bbs.class);
-                    list.add(bbs);
+                try {
+                    // json 데이터를 Bbs 인스턴스로 변환오류 발생 가능성 있음.
+                    // 그래서 예외처리가 필요.
+                    for (DataSnapshot item : data.getChildren()) {
+                        Bbs bbs = item.getValue(Bbs.class);
+                        list.add(bbs);
+                    }
+                }catch(Exception e){
+                    Log.e("Firebase", e.getMessage());
                 }
             }
 
